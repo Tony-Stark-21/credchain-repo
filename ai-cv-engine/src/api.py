@@ -7,9 +7,10 @@ from typing import Any, Dict
 
 from fastapi import Body, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response
+from fastapi.responses import HTMLResponse, Response
 
 from .cv_render import render_cv_png
+from .studio import STUDIO_HTML
 
 app = FastAPI(
     title="CredChain AI CV Engine",
@@ -38,6 +39,12 @@ def root() -> Dict[str, Any]:
 @app.get("/health")
 def health() -> Dict[str, str]:
     return {"status": "healthy"}
+
+
+@app.get("/studio", response_class=HTMLResponse)
+def studio() -> str:
+    """Branded CV Studio page: a form + live preview for the demo."""
+    return STUDIO_HTML
 
 
 @app.post("/generate-cv")
