@@ -7,6 +7,9 @@ from typing import Any, Dict
 
 from fastapi import Body, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import Response
+
+from .cv_render import render_cv_png
 
 app = FastAPI(
     title="CredChain AI CV Engine",
@@ -61,3 +64,39 @@ async def generate_cv(
         "received_keys": list(payload.keys()),
         "received_payload": payload,
     }
+
+
+@app.post(
+    "/generate-cv/image",
+    responses={200: {"content": {"image/png": {}}}},
+)
+async def generate_cv_image(
+    payload: Dict[str, Any] = Body(
+        ...,
+        examples=[
+            {
+                "name": "Ada Lovelace",
+                "title": "Mathematician & Programmer",
+                "summary": "Pioneer of computing; wrote the first algorithm "
+                "intended for a machine.",
+                "email": "ada@credchain.io",
+                "phone": "+44 20 1234 5678",
+                "location": "London, UK",
+                "skills": ["Python", "Mathematics", "Algorithms", "Analysis"],
+                "achievements": [
+                    "Authored the first published computer algorithm.",
+                    "Translated and expanded Menabrea's Analytical Engine notes.",
+                    "Foresaw computers handling more than pure calculation.",
+                ],
+            }
+        ],
+    )
+) -> Response:
+    """
+    Accept CV data as JSON and return a designed PNG image of the CV.
+
+    Same flexible input as /generate-cv; unknown keys are ignored.
+    Returns image/png bytes you can view, download, or embed.
+    """
+    png_bytes = render_cv_png(payload)
+    return Response(content=png_bytes, media_type="image/png")
