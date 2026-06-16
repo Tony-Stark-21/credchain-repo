@@ -5,7 +5,7 @@
 
 from typing import Any, Dict
 
-from fastapi import FastAPI, Request
+from fastapi import Body, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
@@ -38,16 +38,22 @@ def health() -> Dict[str, str]:
 
 
 @app.post("/generate-cv")
-async def generate_cv(request: Request) -> Dict[str, Any]:
+async def generate_cv(
+    payload: Dict[str, Any] = Body(
+        ...,
+        examples=[
+            {
+                "name": "Ada Lovelace",
+                "skills": ["Python", "Math"],
+                "summary": "Test run",
+            }
+        ],
+    )
+) -> Dict[str, Any]:
     """
     Accept an arbitrary JSON dictionary payload and return a JSON
     receipt verifying the data was delivered to the CV engine.
     """
-    try:
-        payload: Dict[str, Any] = await request.json()
-    except Exception:
-        payload = {}
-
     return {
         "success": True,
         "service": "ai-cv-engine",
