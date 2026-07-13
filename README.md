@@ -20,16 +20,14 @@ Instead of manually writing a resume, users can generate one automatically using
 
 ## My Contribution
 
-I developed the AI CV generation component of this project.
+I contributed to the AI CV generation feature of this project.
 
-My responsibilities included:
+My work included:
 
-- Designing the AI CV generation workflow
-- Prompt engineering
-- Formatting generated resumes
-- Improving readability of generated output
-- Integrating the AI response into the application
-
+- Helping implement the AI-powered CV generation feature.
+- Working on prompt design and testing.
+- Assisting with integrating the feature into the project.
+- Learning how AI can be used in real-world software.
 ---
 
 ## Technologies Used
