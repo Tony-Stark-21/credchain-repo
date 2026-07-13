@@ -20,14 +20,16 @@ Instead of manually writing a resume, users can generate one automatically using
 
 ## My Contribution
 
-I contributed to the AI CV generation feature of this project.
+I worked on the AI CV generation feature for this project.
 
-My work included:
+This project gave me practical experience in:
 
-- Helping implement the AI-powered CV generation feature.
-- Working on prompt design and testing.
-- Assisting with integrating the feature into the project.
-- Learning how AI can be used in real-world software.
+- Working with AI tools
+- Structuring prompts
+- Testing generated outputs
+- Collaborating in a hackathon team
+
+As a Software Engineering student currently learning Python, this project helped me understand how AI can be integrated into real applications.
 ---
 
 ## Technologies Used
